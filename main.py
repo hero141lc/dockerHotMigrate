@@ -43,7 +43,6 @@ def bakDocker():
 def dockerLog():
     os.system("docker logs --tail 20 looper2")
 def createDocker():
-    os.system(r"mkdir /home/zy/garbage")
     string_value=os.popen(r"docker create --name looper2 --security-opt seccomp:unconfined busybox /bin/sh -c 'i=0; while true; do echo $i; i=$(expr $i + 1); sleep 1; done'").read()
     hots_remote.container=''.join(ch for ch in string_value if ch.isalnum())
     print("hots_remote.container ID:",hots_remote.container,"end")
@@ -52,7 +51,7 @@ def sendData():
     startTime=datetime.datetime.now()
    
     print("开启优化算法",startTime)
-    os.system(r"scp -r -C /home/zy/tempData zy@192.168.36.130:/home/zy/garbage/")
+    os.system(r"scp -r -C /home/zy/tempData zy@192.168.36.130:/home/zy/garbage")
     endTime=datetime.datetime.now()
     print("运行结束",endTime)
     print("共用时",(endTime-startTime).seconds,"秒")
@@ -66,7 +65,7 @@ def sendData():
 def reliveDocker():
     
     os.system(r"mv /home/zy/tempData/checkpoint2/  /var/lib/docker/containers/"+hots_remote.container+"/checkpoints")
-    os.system(r"docker start --checkpoint=checkpoint2 looper-clone")
+    os.system(r"docker start --checkpoint=checkpoint2 looper2")
 def clearDocker():
     os.system(r"docker checkpoint rm looper2 checkpoint2")
     os.system(r"docker stop looper2")
