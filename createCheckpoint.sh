@@ -1,1 +1,1 @@
-docker checkpoint create --checkpoint-dir=./tempData looper2 checkpoint2
+docker checkpoint create --checkpoint-dir=./tempData/ looper2 checkpoint2
