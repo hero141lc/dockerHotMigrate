@@ -63,6 +63,7 @@ def sendData():
 def reliveDocker():
     os.system(r"docker start --checkpoint-dir=./tempData/ --checkpoint=checkpoint2 looper2")
 def clearDocker():
+    os.system(r"docker checkpoint rm looper2 checkpoint2")
     os.system(r"docker stop looper2")
     os.system(r"docker rm looper2")
     os.system("rm -rf tempData")
